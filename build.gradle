@@ -1,0 +1,41 @@
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+}
+
+defaultTasks 'clean', 'build'
+
+ext.projectHome = "$rootDir"
+
+apply from: "$rootDir/gradle/libs.gradle"
+
+allprojects {
+  group = 'com.assurity'
+}
+
+subprojects {
+  task('all')
+  apply plugin: 'java'
+  apply plugin: 'eclipse'
+
+  repositories {
+    mavenCentral()
+  }
+
+  configurations {
+    all*.exclude module: "slf4j-log4j12"
+  }
+  
+  tasks.getByPath('all').dependsOn build
+
+  sourceCompatibility = '1.8'
+  targetCompatibility = '1.8'
+
+  task listAllDependencies(type: DependencyReportTask) {}
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '4.7'
+}

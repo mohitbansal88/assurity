@@ -1,0 +1,7 @@
+dependencies {
+  compile TEST_LIBS.restassured
+  compile TEST_LIBS.testng
+  compile LIBS.slf4j
+  compile LIBS.jackson
+  compile LIBS.logback
+ }

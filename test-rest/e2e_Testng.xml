@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="e2eSuite" parallel="tests" thread-count="6">
+  <test name="e2eTest1">
+    <classes>
+      <class name="com.assurity.e2e.test1"/>
+      <class name="com.assurity.e2e.test2"/>
+    </classes>
+  </test> <!-- Test -->
+    <test name="e2eTest2">
+    <classes>
+      <class name="com.assurity.e2e.test3"/>
+    </classes>
+  </test> <!-- Test -->
+   <test name="e2eTest3">
+    <classes>
+      <class name="com.assurity.e2e.test4"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

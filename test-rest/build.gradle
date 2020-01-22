@@ -1,0 +1,74 @@
+// We don't want our integration tests to run automatically when someone does a build
+// nor do we want to rely on dynamically including integration test projects as regular
+// sub-projects that run on a build. See
+// https://www.michael-bull.com/blog/2016/06/04/separating-integration-and-unit-tests-with-gradle
+
+sourceSets {
+  integTest {
+    java.srcDir 'src/integTest/java'
+    resources.srcDir 'src/integTest/resources'
+  }
+}
+
+configurations {
+  integTestCompile.extendsFrom testCompile
+  integTestRuntime.extendsFrom testRuntime
+}
+
+dependencies {
+  testCompile project(':test-common')
+}
+
+tasks.withType(Test) {
+  // Never skip when running the task
+  outputs.upToDateWhen { false }
+
+  useTestNG()
+  systemProperty 'TS_TEST_ENV', findProperty('TS_TEST_ENV') ?: ""
+
+  // show standard out and standard error of the test JVM(s) on the console
+  testLogging.showStandardStreams = true
+
+  // set heap size for the test JVM(s)
+  minHeapSize = "128m"
+  maxHeapSize = "512m"
+
+  // set JVM arguments for the test JVM(s)
+  jvmArgs '-XX:MaxPermSize=256m'
+  maxParallelForks = 1
+
+  // listen to events in the test execution lifecycle
+  beforeTest { descriptor ->
+    logger.lifecycle("Running test: " + descriptor)
+  }
+}
+
+task integTest(type: Test) {
+  group = LifecycleBasePlugin.VERIFICATION_GROUP
+  description = 'Runs the integration tests.'
+
+  testClassesDir = sourceSets.integTest.output.getClassesDir()
+  classpath = sourceSets.integTest.runtimeClasspath
+}
+
+task E2ETestSuite(type: Test){
+  group = LifecycleBasePlugin.VERIFICATION_GROUP
+  description = 'Runs the integration tests.'
+
+  testClassesDir = sourceSets.integTest.output.getClassesDir()
+  classpath = sourceSets.integTest.runtimeClasspath
+  useTestNG(){
+     suites 'e2e_Testng.xml'
+  }
+}
+
+task SingleTest(type: Test){
+  group = LifecycleBasePlugin.VERIFICATION_GROUP
+  description = 'Runs the integration tests.'
+
+  testClassesDir = sourceSets.integTest.output.getClassesDir()
+  classpath = sourceSets.integTest.runtimeClasspath
+  useTestNG(){
+    suites 'singleTest_Testng.xml'
+  }
+}

@@ -1,0 +1,27 @@
+ext.LIBS = [
+  jackson: [
+    'com.fasterxml.jackson.core:jackson-databind:2.8.6',
+    'com.fasterxml.jackson.core:jackson-core:2.8.6'
+  ],
+  slf4j: [
+    'org.slf4j:slf4j-api:1.7.5'
+  ],
+  logback: [
+    'ch.qos.logback:logback-core:1.0.9',
+    'ch.qos.logback:logback-classic:1.0.9',
+    "org.apache.logging.log4j:log4j-to-slf4j:2.7"
+  ]
+]
+
+// ============================= Testing Libs ===============================
+ext.TEST_LIBS =[
+  restassured: [
+    'io.rest-assured:rest-assured:3.0.0',
+  ],
+  testng: [
+    'org.testng:testng:6.14.3',
+  ],
+  mockito: [
+    'org.mockito:mockito-all:1.9.5',
+  ]
+]

@@ -1,0 +1,7 @@
+rootProject.name = "assurity"
+
+include 'test-common'
+include 'test-rest'
+
+project(':test-common').projectDir = new File(rootDir, 'test-common');
+project(':test-rest').projectDir = new File(rootDir, 'test-rest')
