@@ -51,9 +51,13 @@ There are 5 configuration files [local|qa|stage|prod|dev].properties
  * From Eclipse, set -DTS_TEST_ENV=[local|qa|stage|prod|dev] in VM Arguments from Debug Configuration.
 
 ## To run Acceptance Criteria test run
- ./gradlew clean build SingleTest -PTS_TEST_ENV=local
- <br>Reports are available at assurity/test-rest/build/reports/tests/SingleTest/index.html
- 
+ * ./gradlew clean build SingleTest -PTS_TEST_ENV=local
+   <br>Reports are available at assurity/test-rest/build/reports/tests/SingleTest/index.html
+
+ * Import project in Eclipse > 
+    * Right click on CategoryTest.java > Run as TestNG test
+    * Right click on singleTest_Testng.xml > Run as TestNG test
+    <br>Reports are available at assurity/test-rest/test-output/index.html
  
 ## Framework allows below operation as well. 
 
@@ -63,9 +67,10 @@ There are 5 configuration files [local|qa|stage|prod|dev].properties
  <br>Reports are available at assurity/test-rest/build/reports/tests/integTest/index.html
  
 ## Run Single test (CategoryTest)
- ./gradlew clean SingleTest -PTS_TEST_ENV=[local|qa|stage|prod|dev]
-<br>This will run test suite defined in singleTest_Testng.xml
-<br>Reports are available at assurity/test-rest/build/reports/tests/SingleTest/index.html
+  ./gradlew clean SingleTest -PTS_TEST_ENV=[local|qa|stage|prod|dev]
+  <br>This will run test suite defined in singleTest_Testng.xml
+  <br>Reports are available at assurity/test-rest/build/reports/tests/SingleTest/index.html
+
 
 ## Run a single test class
   The standard gradle filtering for tests will work (without having to manipulate XML test suites). e.g. You can run
@@ -73,13 +78,13 @@ There are 5 configuration files [local|qa|stage|prod|dev].properties
   <br>Reports are available at assurity/test-rest/build/reports/tests/integTest/index.html
 
 ## Run E2ETestSuite tests
- ./gradlew clean E2ETestSuite -PTS_TEST_ENV=[local|qa|stage|prod|dev]
-<br>This will run the test suite defined in e2e_Testng.xml. 
-<br>This will allow to run tests in parallel, which will reduce build time.
-<br>Reports are available at assurity/test-rest/build/reports/tests/E2ETestSuite/index.html
-<br>In order to check if -PTS_TEST_ENV works, then set it to stage. 
-<br>stage.properties has incorrect host name and test will fail.
+  ./gradlew clean E2ETestSuite -PTS_TEST_ENV=[local|qa|stage|prod|dev]
+  <br>This will run the test suite defined in e2e_Testng.xml. 
+  <br>This will allow to run tests in parallel, which will reduce build time.
+  <br>Reports are available at assurity/test-rest/build/reports/tests/E2ETestSuite/index.html
+  <br>In order to check if -PTS_TEST_ENV works, then set it to stage. 
+  <br>stage.properties has incorrect host name and test will fail.
 
  
 # Environment Variables
-TS_TEST_LIB_LOG_LEVEL=[Info|Warning|Debug]
+  TS_TEST_LIB_LOG_LEVEL=[Info|Warning|Debug]
